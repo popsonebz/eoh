@@ -1,0 +1,33 @@
+version: '3'
+services:
+  address_book_database:
+    image: postgres:11.2
+    environment:
+      - POSTGRES_DB=address_db
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password123
+    ports:
+     - "5432:5432"
+  address_book_api:
+    build:
+      context: ./backend_api
+      dockerfile: Dockerfile
+    links:
+      - address_book_database
+    environment:
+      - FLASK_ENV=development
+      - DATABASE_URL=postgres://admin:password123@address_book_database:5432/address_db
+      - POSTGRES_PASSWORD=password123
+      - POSTGRES_USER=admin
+    ports:
+     - "5000:5000"
+    depends_on:
+      - address_book_database
+  address_book_web:
+    build:
+      context: ./frontend_app
+      dockerfile: Dockerfile
+    ports:
+     - "4200:4200"
+    depends_on:
+      - address_book_api
