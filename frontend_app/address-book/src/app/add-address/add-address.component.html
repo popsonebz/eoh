@@ -1,0 +1,43 @@
+<div class="col-md-6">
+  <h2 class="text-center">Add Address</h2>
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+    
+    <div class="form-group">
+      <label for="first_name">First Name:</label>
+      <input formControlName="first_name" placeholder="First Name" name="first_name" class="form-control" id="first_name">
+      <div class="alert alert-danger" *ngIf="addForm.controls.first_name.touched && !addForm.controls.first_name.valid">
+        <div *ngIf="addForm.controls.first_name.errors.required"><label>First Name is required</label></div>
+        <div *ngIf="addForm.controls.first_name.errors.pattern"><label>Enter a valid name</label></div>
+    </div>
+    </div>
+
+    <div class="form-group">
+      <label for="last_name">Last Name:</label>
+      <input formControlName="last_name" placeholder="Last name" name="last_name" class="form-control" id="last_name">
+      <div class="alert alert-danger" *ngIf="addForm.controls.last_name.touched && !addForm.controls.last_name.valid">
+        <div *ngIf="addForm.controls.last_name.errors.required"><label>Last Name is required</label></div>
+        <div *ngIf="addForm.controls.last_name.errors.pattern"><label>Enter a valid name</label></div>
+    </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email address:</label>
+      <input type="email" formControlName="email" placeholder="Email" name="email" class="form-control" id="email">
+       <div class="alert alert-danger" *ngIf="!addForm.controls.email.valid && (addForm.controls.email.touched || addForm.controls.email.dirty)">
+         <div *ngIf="addForm.controls.email.errors.required"><label>Email is required</label></div>
+         <div *ngIf="addForm.controls.email.errors.pattern">Email must be a valid email address</div>
+     </div>
+    </div>
+
+    <div class="form-group">
+      <label for="phone_number">Phone Number:</label>
+      <input type="tel" formControlName="phone_number" placeholder="Phone Number" name="phone_number" class="form-control" id="phone_number">
+      <div class="alert alert-danger" *ngIf="addForm.controls.phone_number.touched && !addForm.controls.phone_number.valid">
+        <div *ngIf="addForm.controls.phone_number.errors.required"><label>Phone Number is required</label></div>
+        <div *ngIf="addForm.controls.phone_number.errors.pattern"><label>Enter a valid phone number</label></div>
+    </div>
+    </div>
+
+    <button class="btn btn-success" [disabled]="!addForm.valid">Add</button>
+  </form>
+</div>

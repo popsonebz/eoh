@@ -1,0 +1,25 @@
+<div class="col-md-6">
+  <h2> All Addresses</h2>
+  <button class="btn btn-danger" (click)="addAddress()"> Add Address</button>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Phone Number</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let address of addresses">
+      <td>{{address.first_name}}</td>
+      <td>{{address.last_name}}</td>
+      <td>{{address.email}}</td>
+      <td>{{address.phone_number}}</td>
+      <td><button class="btn btn-danger" (click)="deleteAddress(address)"> Delete</button>
+        <button class="btn btn-danger" (click)="editAddress(address)" style="margin-left: 20px;"> Edit</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
