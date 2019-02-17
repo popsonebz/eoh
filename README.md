@@ -13,3 +13,7 @@ To run this application, clone the repository and run the following commands on 
 ```docker-compose up```
 
 Open any web browser and visit the url 0.0.0.0:4200
+
+# Note
+
+The unit test for the backend is almost complete. 
