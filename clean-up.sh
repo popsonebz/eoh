@@ -1,0 +1,7 @@
+#!/bin/sh
+docker stop assessment_address_book_web_1
+docker rm assessment_address_book_web_1
+docker stop assessment_address_book_api_1
+docker rm assessment_address_book_api_1
+docker stop assessment_address_book_database_1
+docker rm assessment_address_book_database_1
