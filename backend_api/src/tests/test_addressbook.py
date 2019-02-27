@@ -58,6 +58,37 @@ class AddressesTest(unittest.TestCase):
     json_data = json.loads(res.data)
     self.assertEqual(res.status_code, 400)
 
+  def test_get_an_address(self):
+    """ Test for getting an address """
+    res = self.client().post('/api/v1/addresses/', headers={'Content-Type': 'application/json'}, data=json.dumps(self.address))
+    self.assertEqual(res.status_code, 201)
+    res = self.client().get('/api/v1/addresses/1', headers={'Content-Type': 'application/json'})
+    json_data = json.loads(res.data)
+    self.assertEqual(res.status_code, 200)
+    self.assertEqual(json_data.get('email'), self.address['email'])
+    self.assertEqual(json_data.get('first_name'), self.address['first_name'])
+
+  def test_address_update(self):
+    """ Test Updating the name of in an address"""
+    address1 = {
+      'first_name': 'lepolesa'
+    }
+    res = self.client().post('/api/v1/addresses/', headers={'Content-Type': 'application/json'}, data=json.dumps(self.address))
+    self.assertEqual(res.status_code, 201)
+    res = self.client().put('/api/v1/addresses/1', headers={'Content-Type': 'application/json'}, data=json.dumps(address1))
+    json_data = json.loads(res.data)
+    self.assertEqual(res.status_code, 200)
+    self.assertEqual(json_data.get('message'), "address updated successfully")
+
+  def test_delete_address(self):
+    """ Test Address Delete """
+    res = self.client().post('/api/v1/addresses/', headers={'Content-Type': 'application/json'}, data=json.dumps(self.address))
+    self.assertEqual(res.status_code, 201)
+    json_data = json.loads(res.data)
+    id=str(json_data['id'])
+    res = self.client().delete('/api/v1/addresses/' + id, headers={'Content-Type': 'application/json'})
+    self.assertEqual(res.status_code, 204)
+
   def tearDown(self):
     """
     Tear Down

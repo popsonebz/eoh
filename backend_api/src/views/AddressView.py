@@ -28,7 +28,10 @@ def add_new_address():
   address = AddressModel(data)
   address.save()
 
-  return custom_response({'message': "contact added"}, 201)
+  address_data = address_schema.dump(address).data
+
+  return custom_response({'message': "contact added", 'id': address_data.get('id')
+  }, 201)
   
 
 @address_api.route('/', methods=['GET'])
